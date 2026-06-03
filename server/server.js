@@ -1,39 +1,24 @@
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios");
-const axiosRetry = require("axios-retry").default;
-require("dotenv").config();
+const mongoose = require("mongoose");
+require("dotenv").config({ override: true });
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
-const tmdbApi = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
-  timeout: 10000,
-  headers: {
-    Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
-  },
-});
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error("MongoDB error:", err));
 
-axiosRetry(tmdbApi, {
-  retries: 3,
-  retryDelay: (retryCount) => retryCount * 1000,
-});
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/movies", require("./routes/movies"));
+app.use("/api/cities", require("./routes/cities"));
+app.use("/api/cinemas", require("./routes/cinemas"));
+app.use("/api/showtimes", require("./routes/showtimes"));
+app.use("/api/seats", require("./routes/seats"));
+app.use("/api/bookings", require("./routes/bookings"));
 
-app.get("/api/test", (req, res) => {
-  res.json({ message: "API is working 🚀" });
-});
+app.get("/api/test", (req, res) => res.json({ message: "API is working 🚀" }));
 
-app.get("/api/movies", async (req, res) => {
-  try {
-    const response = await tmdbApi.get("/movie/popular");
-    res.json(response.data.results);
-  } catch (error) {
-    console.error("Code:", error.code);
-    console.error("Message:", error.message);
-    console.error("Details:", error.response?.data);
-    res.status(500).json({ error: "Error fetching movies" });
-  }
-});
-
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(5000, '127.0.0.1', () => console.log("Server running on port 5000"));

@@ -1,0 +1,212 @@
+[dotenv@17.3.1] injecting env (3) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Connected to MongoDB
+Cleared existing data
+Seeded 20 cities
+Seeded 53 cinemas
+Seeded 173 halls
+Fetching movies by language...
+  Lang hi: 40 movies
+  Lang en: 40 movies
+  Lang ta: 40 movies
+  Lang te: 40 movies
+  Lang bn: 40 movies
+  Lang ml: 40 movies
+  Lang kn: 40 movies
+  Lang mr: 40 movies
+  Lang gu: 40 movies
+  Lang pa: 40 movies
+Mumbai: 20 movies
+Delhi: 20 movies
+Bangalore: 20 movies
+Chennai: 20 movies
+Hyderabad: 20 movies
+Pune: 20 movies
+Kolkata: 20 movies
+Ahmedabad: 20 movies
+Jaipur: 20 movies
+Kochi: 20 movies
+Lucknow: 20 movies
+Chandigarh: 20 movies
+Indore: 20 movies
+Bhopal: 20 movies
+Nagpur: 20 movies
+Surat: 20 movies
+Visakhapatnam: 20 movies
+Coimbatore: 20 movies
+Bhubaneswar: 20 movies
+Guwahati: 20 movies
+Hall done: PVR Juhu — Audi 1 | 27 showtimes
+Hall done: PVR Juhu — Audi 2 | 27 showtimes
+Hall done: PVR Juhu — Audi 3 | 27 showtimes
+Hall done: PVR Juhu — Audi 4 | 27 showtimes
+Hall done: INOX Nariman Point — Audi 1 | 27 showtimes
+Hall done: INOX Nariman Point — Audi 2 | 27 showtimes
+Hall done: INOX Nariman Point — Audi 3 | 27 showtimes
+Hall done: INOX Nariman Point — Audi 4 | 27 showtimes
+Hall done: Cinepolis Andheri — Audi 1 | 27 showtimes
+Hall done: Cinepolis Andheri — Audi 2 | 27 showtimes
+Hall done: Cinepolis Andheri — Audi 3 | 27 showtimes
+Hall done: Cinepolis Andheri — Audi 4 | 27 showtimes
+Hall done: PVR Phoenix Palladium — Audi 1 | 27 showtimes
+Hall done: PVR Phoenix Palladium — Audi 2 | 27 showtimes
+Hall done: PVR Phoenix Palladium — Audi 3 | 27 showtimes
+Hall done: PVR Phoenix Palladium — Audi 4 | 27 showtimes
+Hall done: PVR Select Citywalk — Audi 1 | 27 showtimes
+Hall done: PVR Select Citywalk — Audi 2 | 27 showtimes
+Hall done: PVR Select Citywalk — Audi 3 | 27 showtimes
+Hall done: PVR Select Citywalk — Audi 4 | 27 showtimes
+Hall done: INOX Nehru Place — Audi 1 | 27 showtimes
+Hall done: INOX Nehru Place — Audi 2 | 27 showtimes
+Hall done: INOX Nehru Place — Audi 3 | 27 showtimes
+Hall done: INOX Nehru Place — Audi 4 | 27 showtimes
+Hall done: Cinepolis DLF — Audi 1 | 27 showtimes
+Hall done: Cinepolis DLF — Audi 2 | 27 showtimes
+Hall done: Cinepolis DLF — Audi 3 | 27 showtimes
+Hall done: Cinepolis DLF — Audi 4 | 27 showtimes
+Hall done: PVR Ambience Mall — Audi 1 | 27 showtimes
+Hall done: PVR Ambience Mall — Audi 2 | 27 showtimes
+Hall done: PVR Ambience Mall — Audi 3 | 27 showtimes
+Hall done: PVR Ambience Mall — Audi 4 | 27 showtimes
+Hall done: PVR Forum Mall — Audi 1 | 27 showtimes
+Hall done: PVR Forum Mall — Audi 2 | 27 showtimes
+Hall done: PVR Forum Mall — Audi 3 | 27 showtimes
+Hall done: PVR Forum Mall — Audi 4 | 27 showtimes
+Hall done: INOX Garuda Mall — Audi 1 | 27 showtimes
+Hall done: INOX Garuda Mall — Audi 2 | 27 showtimes
+Hall done: INOX Garuda Mall — Audi 3 | 27 showtimes
+Hall done: INOX Garuda Mall — Audi 4 | 27 showtimes
+Hall done: Cinepolis Orion Mall — Audi 1 | 27 showtimes
+Hall done: Cinepolis Orion Mall — Audi 2 | 27 showtimes
+Hall done: Cinepolis Orion Mall — Audi 3 | 27 showtimes
+Hall done: Cinepolis Orion Mall — Audi 4 | 27 showtimes
+Hall done: PVR VR Chennai — Audi 1 | 27 showtimes
+Hall done: PVR VR Chennai — Audi 2 | 27 showtimes
+Hall done: PVR VR Chennai — Audi 3 | 27 showtimes
+Hall done: PVR VR Chennai — Audi 4 | 27 showtimes
+Hall done: INOX Escape — Audi 1 | 27 showtimes
+Hall done: INOX Escape — Audi 2 | 27 showtimes
+Hall done: INOX Escape — Audi 3 | 27 showtimes
+Hall done: INOX Escape — Audi 4 | 27 showtimes
+Hall done: Cinepolis Marina Mall — Audi 1 | 27 showtimes
+Hall done: Cinepolis Marina Mall — Audi 2 | 27 showtimes
+Hall done: Cinepolis Marina Mall — Audi 3 | 27 showtimes
+Hall done: Cinepolis Marina Mall — Audi 4 | 27 showtimes
+Hall done: PVR Inorbit Mall — Audi 1 | 27 showtimes
+Hall done: PVR Inorbit Mall — Audi 2 | 27 showtimes
+Hall done: PVR Inorbit Mall — Audi 3 | 27 showtimes
+Hall done: PVR Inorbit Mall — Audi 4 | 27 showtimes
+Hall done: INOX GVK One — Audi 1 | 27 showtimes
+Hall done: INOX GVK One — Audi 2 | 27 showtimes
+Hall done: INOX GVK One — Audi 3 | 27 showtimes
+Hall done: INOX GVK One — Audi 4 | 27 showtimes
+Hall done: Cinepolis Sudha — Audi 1 | 27 showtimes
+Hall done: Cinepolis Sudha — Audi 2 | 27 showtimes
+Hall done: Cinepolis Sudha — Audi 3 | 27 showtimes
+Hall done: Cinepolis Sudha — Audi 4 | 27 showtimes
+Hall done: PVR Phoenix Marketcity — Audi 1 | 27 showtimes
+Hall done: PVR Phoenix Marketcity — Audi 2 | 27 showtimes
+Hall done: PVR Phoenix Marketcity — Audi 3 | 27 showtimes
+Hall done: INOX Bund Garden — Audi 1 | 27 showtimes
+Hall done: INOX Bund Garden — Audi 2 | 27 showtimes
+Hall done: INOX Bund Garden — Audi 3 | 27 showtimes
+Hall done: Cinepolis Amanora — Audi 1 | 27 showtimes
+Hall done: Cinepolis Amanora — Audi 2 | 27 showtimes
+Hall done: Cinepolis Amanora — Audi 3 | 27 showtimes
+Hall done: PVR Acropolis — Audi 1 | 27 showtimes
+Hall done: PVR Acropolis — Audi 2 | 27 showtimes
+Hall done: PVR Acropolis — Audi 3 | 27 showtimes
+Hall done: PVR Acropolis — Audi 4 | 27 showtimes
+Hall done: INOX South City — Audi 1 | 27 showtimes
+Hall done: INOX South City — Audi 2 | 27 showtimes
+Hall done: INOX South City — Audi 3 | 27 showtimes
+Hall done: INOX South City — Audi 4 | 27 showtimes
+Hall done: Miraj Cinemas Kolkata — Audi 1 | 27 showtimes
+Hall done: Miraj Cinemas Kolkata — Audi 2 | 27 showtimes
+Hall done: Miraj Cinemas Kolkata — Audi 3 | 27 showtimes
+Hall done: Miraj Cinemas Kolkata — Audi 4 | 27 showtimes
+Hall done: PVR Iscon Mega Mall — Audi 1 | 27 showtimes
+Hall done: PVR Iscon Mega Mall — Audi 2 | 27 showtimes
+Hall done: PVR Iscon Mega Mall — Audi 3 | 27 showtimes
+Hall done: INOX Himalaya Mall — Audi 1 | 27 showtimes
+Hall done: INOX Himalaya Mall — Audi 2 | 27 showtimes
+Hall done: INOX Himalaya Mall — Audi 3 | 27 showtimes
+Hall done: Cinepolis AlphaOne — Audi 1 | 27 showtimes
+Hall done: Cinepolis AlphaOne — Audi 2 | 27 showtimes
+Hall done: Cinepolis AlphaOne — Audi 3 | 27 showtimes
+Hall done: PVR Crystal Palm — Audi 1 | 27 showtimes
+Hall done: PVR Crystal Palm — Audi 2 | 27 showtimes
+Hall done: PVR Crystal Palm — Audi 3 | 27 showtimes
+Hall done: INOX Raj Mandir — Audi 1 | 27 showtimes
+Hall done: INOX Raj Mandir — Audi 2 | 27 showtimes
+Hall done: INOX Raj Mandir — Audi 3 | 27 showtimes
+Hall done: Carnival Jaipur — Audi 1 | 27 showtimes
+Hall done: Carnival Jaipur — Audi 2 | 27 showtimes
+Hall done: Carnival Jaipur — Audi 3 | 27 showtimes
+Hall done: PVR Lulu Mall — Audi 1 | 27 showtimes
+Hall done: PVR Lulu Mall — Audi 2 | 27 showtimes
+Hall done: PVR Lulu Mall — Audi 3 | 27 showtimes
+Hall done: INOX Oberon Mall — Audi 1 | 27 showtimes
+Hall done: INOX Oberon Mall — Audi 2 | 27 showtimes
+Hall done: INOX Oberon Mall — Audi 3 | 27 showtimes
+Hall done: Cinepolis Centre Square — Audi 1 | 27 showtimes
+Hall done: Cinepolis Centre Square — Audi 2 | 27 showtimes
+Hall done: Cinepolis Centre Square — Audi 3 | 27 showtimes
+Hall done: PVR Phoenix Palassio — Audi 1 | 27 showtimes
+Hall done: PVR Phoenix Palassio — Audi 2 | 27 showtimes
+Hall done: PVR Phoenix Palassio — Audi 3 | 27 showtimes
+Hall done: INOX Fun Republic — Audi 1 | 27 showtimes
+Hall done: INOX Fun Republic — Audi 2 | 27 showtimes
+Hall done: INOX Fun Republic — Audi 3 | 27 showtimes
+Hall done: Miraj Cinemas Lucknow — Audi 1 | 27 showtimes
+Hall done: Miraj Cinemas Lucknow — Audi 2 | 27 showtimes
+Hall done: Miraj Cinemas Lucknow — Audi 3 | 27 showtimes
+Hall done: PVR Elante Mall — Audi 1 | 27 showtimes
+Hall done: PVR Elante Mall — Audi 2 | 27 showtimes
+Hall done: PVR Elante Mall — Audi 3 | 27 showtimes
+Hall done: INOX Sector 17 — Audi 1 | 27 showtimes
+Hall done: INOX Sector 17 — Audi 2 | 27 showtimes
+Hall done: INOX Sector 17 — Audi 3 | 27 showtimes
+Hall done: PVR C21 Mall — Audi 1 | 27 showtimes
+Hall done: PVR C21 Mall — Audi 2 | 27 showtimes
+Hall done: PVR C21 Mall — Audi 3 | 27 showtimes
+Hall done: Carnival Indore — Audi 1 | 27 showtimes
+Hall done: Carnival Indore — Audi 2 | 27 showtimes
+Hall done: Carnival Indore — Audi 3 | 27 showtimes
+Hall done: PVR DB City — Audi 1 | 27 showtimes
+Hall done: PVR DB City — Audi 2 | 27 showtimes
+Hall done: PVR DB City — Audi 3 | 27 showtimes
+Hall done: Miraj Cinemas Bhopal — Audi 1 | 27 showtimes
+Hall done: Miraj Cinemas Bhopal — Audi 2 | 27 showtimes
+Hall done: Miraj Cinemas Bhopal — Audi 3 | 27 showtimes
+Hall done: PVR Eternity Mall — Audi 1 | 27 showtimes
+Hall done: PVR Eternity Mall — Audi 2 | 27 showtimes
+Hall done: PVR Eternity Mall — Audi 3 | 27 showtimes
+Hall done: INOX Empress City — Audi 1 | 27 showtimes
+Hall done: INOX Empress City — Audi 2 | 27 showtimes
+Hall done: INOX Empress City — Audi 3 | 27 showtimes
+Hall done: PVR VR Surat — Audi 1 | 27 showtimes
+Hall done: PVR VR Surat — Audi 2 | 27 showtimes
+Hall done: PVR VR Surat — Audi 3 | 27 showtimes
+Hall done: Cinepolis Dream Square — Audi 1 | 27 showtimes
+Hall done: Cinepolis Dream Square — Audi 2 | 27 showtimes
+Hall done: Cinepolis Dream Square — Audi 3 | 27 showtimes
+Hall done: PVR CMR Central — Audi 1 | 27 showtimes
+Hall done: PVR CMR Central — Audi 2 | 27 showtimes
+Hall done: PVR CMR Central — Audi 3 | 27 showtimes
+Hall done: INOX Vizag — Audi 1 | 27 showtimes
+Hall done: INOX Vizag — Audi 2 | 27 showtimes
+Hall done: INOX Vizag — Audi 3 | 27 showtimes
+Hall done: PVR Brookefields — Audi 1 | 27 showtimes
+Hall done: PVR Brookefields — Audi 2 | 27 showtimes
+Hall done: Carnival Coimbatore — Audi 1 | 27 showtimes
+Hall done: Carnival Coimbatore — Audi 2 | 27 showtimes
+Hall done: Miraj Cinemas Bhubaneswar — Audi 1 | 27 showtimes
+Hall done: Miraj Cinemas Bhubaneswar — Audi 2 | 27 showtimes
+Hall done: Carnival Bhubaneswar — Audi 1 | 27 showtimes
+Hall done: Carnival Bhubaneswar — Audi 2 | 27 showtimes
+Hall done: PVR Dona Planet — Audi 1 | 27 showtimes
+Hall done: PVR Dona Planet — Audi 2 | 27 showtimes
+Hall done: Miraj Cinemas Guwahati — Audi 1 | 27 showtimes
+Hall done: Miraj Cinemas Guwahati — Audi 2 | 27 showtimes
+Seeded 4671 showtimes
+Seed complete ✅
