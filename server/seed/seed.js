@@ -11,17 +11,18 @@ const axiosRetry = require("axios-retry").default;
 
 const tmdbApi = axios.create({
   baseURL: "https://api.themoviedb.org/3",
-  timeout: 15000,
+  timeout: 20000,
   headers: { Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}` },
 });
 
 axiosRetry(tmdbApi, {
-  retries: 5,
-  retryDelay: (retryCount) => retryCount * 2000,
+  retries: 3,
+  retryDelay: (retryCount) => retryCount * 3000,
   retryCondition: (error) =>
     axiosRetry.isNetworkError(error) ||
     axiosRetry.isRetryableError(error) ||
-    error.code === "ECONNRESET",
+    error.code === "ECONNRESET" ||
+    error.code === "ETIMEDOUT",
 });
 
 const SHOWTIMES = ["10:00 AM", "6:00 PM", "9:30 PM"];
@@ -60,10 +61,9 @@ async function fetchAllMoviesByLanguage() {
   for (const lang of languages) {
     moviesByLang[lang] = [];
     try {
-      const [popular, nowPlaying] = await Promise.all([
-        tmdbApi.get("/movie/popular", { params: { with_original_language: lang, region: "IN" } }),
-        tmdbApi.get("/movie/now_playing", { params: { with_original_language: lang, region: "IN" } }),
-      ]);
+      const popular = await tmdbApi.get("/movie/popular", { params: { with_original_language: lang, region: "IN" } });
+      await new Promise(r => setTimeout(r, 1500));
+      const nowPlaying = await tmdbApi.get("/movie/now_playing", { params: { with_original_language: lang, region: "IN" } });
       const combined = [...popular.data.results, ...nowPlaying.data.results];
       for (const m of combined) {
         if (!seen.has(m.id)) { seen.add(m.id); }
@@ -73,7 +73,7 @@ async function fetchAllMoviesByLanguage() {
     } catch (e) {
       console.warn(`  Failed lang ${lang}:`, e.message);
     }
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 2000));
   }
   return moviesByLang;
 }
