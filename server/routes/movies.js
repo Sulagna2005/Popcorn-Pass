@@ -67,21 +67,41 @@ router.get("/bycity", async (req, res) => {
   }
 });
 
-// GET /api/movies/upcoming
+// GET /api/movies/upcoming — movies from DB sorted by release date desc
 router.get("/upcoming", async (req, res) => {
   try {
-    const response = await tmdbApi.get("/movie/upcoming");
-    res.json(response.data.results);
+    const Showtime = require("../models/Showtime");
+    const showtimes = await Showtime.find({ status: "active" }).select("movie").lean();
+    const seen = new Set();
+    const movies = [];
+    for (const st of showtimes) {
+      if (!seen.has(st.movie.tmdbId)) {
+        seen.add(st.movie.tmdbId);
+        movies.push({ id: st.movie.tmdbId, title: st.movie.title, poster_path: st.movie.posterPath, backdrop_path: st.movie.backdropPath || null, vote_average: st.movie.voteAverage || 0, release_date: st.movie.releaseDate || "", overview: st.movie.overview || "", original_language: st.movie.language || "en", genre_ids: st.movie.genreIds || [] });
+      }
+    }
+    movies.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+    res.json(movies.slice(0, 20));
   } catch (error) {
     res.status(500).json({ error: "Error fetching upcoming movies" });
   }
 });
 
-// GET /api/movies/toprated
+// GET /api/movies/toprated — movies from DB sorted by vote_average desc
 router.get("/toprated", async (req, res) => {
   try {
-    const response = await tmdbApi.get("/movie/top_rated");
-    res.json(response.data.results);
+    const Showtime = require("../models/Showtime");
+    const showtimes = await Showtime.find({ status: "active" }).select("movie").lean();
+    const seen = new Set();
+    const movies = [];
+    for (const st of showtimes) {
+      if (!seen.has(st.movie.tmdbId)) {
+        seen.add(st.movie.tmdbId);
+        movies.push({ id: st.movie.tmdbId, title: st.movie.title, poster_path: st.movie.posterPath, backdrop_path: st.movie.backdropPath || null, vote_average: st.movie.voteAverage || 0, release_date: st.movie.releaseDate || "", overview: st.movie.overview || "", original_language: st.movie.language || "en", genre_ids: st.movie.genreIds || [] });
+      }
+    }
+    movies.sort((a, b) => b.vote_average - a.vote_average);
+    res.json(movies.slice(0, 20));
   } catch (error) {
     res.status(500).json({ error: "Error fetching top rated movies" });
   }

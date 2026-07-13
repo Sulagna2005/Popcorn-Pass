@@ -6,98 +6,57 @@ const Cinema = require("../models/Cinema");
 const Hall = require("../models/Hall");
 const Showtime = require("../models/Showtime");
 const Seat = require("../models/Seat");
-const axios = require("axios");
-const axiosRetry = require("axios-retry").default;
-
-const tmdbApi = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
-  timeout: 20000,
-  headers: { Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}` },
-});
-
-axiosRetry(tmdbApi, {
-  retries: 3,
-  retryDelay: (retryCount) => retryCount * 3000,
-  retryCondition: (error) =>
-    axiosRetry.isNetworkError(error) ||
-    axiosRetry.isRetryableError(error) ||
-    error.code === "ECONNRESET" ||
-    error.code === "ETIMEDOUT",
-});
+// No TMDB calls needed — movies are hardcoded below
 
 const SHOWTIMES = ["10:00 AM", "6:00 PM", "9:30 PM"];
 const ADVANCE_DAYS = 14;
 
-// City → primary language(s) for TMDB with_original_language filter
+// Hardcoded movie list — mix of Hindi, Tamil, Telugu, Malayalam, English
+const MOVIES = [
+  { id: 1241982, title: "Moana 2", poster_path: "/yh64qw9mgXBvlaWDi7Q9tpUBAvH.jpg", backdrop_path: "/aosm8NMQ3UyoBVpSxyimorCQykC.jpg", overview: "Moana embarks on a new voyage.", release_date: "2024-11-27", vote_average: 7.0, original_language: "en", genre_ids: [16, 10751, 12] },
+  { id: 762509, title: "Mufasa: The Lion King", poster_path: "/lurEK87kukWNaHd0zYnsi3yzJrs.jpg", backdrop_path: "/fqv8v6AycXKsivp1T5yKtLbGXce.jpg", overview: "The story of Mufasa's rise to king.", release_date: "2024-12-20", vote_average: 7.5, original_language: "en", genre_ids: [16, 10751, 18] },
+  { id: 558449, title: "Gladiator II", poster_path: "/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg", backdrop_path: "/euYIwmwkmz95mnXvufEJIE5MKHB.jpg", overview: "Years after witnessing the death of Maximus, Lucius is forced to enter the Colosseum.", release_date: "2024-11-15", vote_average: 6.8, original_language: "en", genre_ids: [28, 12, 18] },
+  { id: 1100782, title: "Sonic the Hedgehog 3", poster_path: "/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg", backdrop_path: "/zOpe0eHsq0A2NvNyBbtT6sj53qV.jpg", overview: "Sonic, Knuckles and Tails reunite against a powerful new adversary.", release_date: "2024-12-20", vote_average: 7.8, original_language: "en", genre_ids: [28, 35, 878] },
+  { id: 1184918, title: "The Wild Robot", poster_path: "/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg", backdrop_path: "/417tYZ4XUyJrtyZXj7HpvWf1E8f.jpg", overview: "A robot stranded on an island learns to survive.", release_date: "2024-09-27", vote_average: 8.3, original_language: "en", genre_ids: [16, 878, 10751] },
+  { id: 1022789, title: "Inside Out 2", poster_path: "/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg", backdrop_path: "/xg27NrXi7VXCGUr7MG75UqLl6Vg.jpg", overview: "Riley enters high school and new emotions arrive.", release_date: "2024-06-14", vote_average: 7.6, original_language: "en", genre_ids: [16, 10751, 18] },
+  { id: 519182, title: "Despicable Me 4", poster_path: "/wWba3TaojhK7NdycyUPlLW0Wr7t.jpg", backdrop_path: "/lgkgICxmdIApHM9tTLdviyLBCQk.jpg", overview: "Gru and Lucy welcome a new member to the family.", release_date: "2024-07-03", vote_average: 7.1, original_language: "en", genre_ids: [16, 35, 10751] },
+  { id: 573435, title: "Bad Boys: Ride or Die", poster_path: "/oGythE98MYleE6mZlGs5oBGkux1.jpg", backdrop_path: "/sWglBMnTdMFEECBqqFbFpFnFYaJ.jpg", overview: "Miami detectives Mike and Marcus are now on the run.", release_date: "2024-06-07", vote_average: 7.2, original_language: "en", genre_ids: [28, 80, 35] },
+  { id: 1209290, title: "Pushpa 2: The Rule", poster_path: "/ie7AoeMfIBBcBkDVMJFMFGmGSHd.jpg", backdrop_path: "/9bXHaLMsyBmF1nEMBiSMFBiNFqy.jpg", overview: "Pushpa Raj expands his red sandalwood smuggling empire.", release_date: "2024-12-05", vote_average: 7.9, original_language: "te", genre_ids: [28, 80, 18] },
+  { id: 1197306, title: "A Working Man", poster_path: "/6FRFIogh3zFnVWn7Z6zcYnIbRcX.jpg", backdrop_path: "/1HpRBdFCJCFPHPgKFGEqO3fvNmb.jpg", overview: "A man discovers his coworker is being trafficked.", release_date: "2025-03-28", vote_average: 7.0, original_language: "en", genre_ids: [28, 53] },
+  { id: 986056, title: "Thunderbolts", poster_path: "/m9EtP1Yrzv6v7dMaC9mRaGhd1um.jpg", backdrop_path: "/m9EtP1Yrzv6v7dMaC9mRaGhd1um.jpg", overview: "A group of Marvel antiheroes assemble.", release_date: "2025-05-02", vote_average: 7.4, original_language: "en", genre_ids: [28, 12, 878] },
+  { id: 1233413, title: "Snow White", poster_path: "/oQxrvHBHClFfGBopljhFCoW5O7o.jpg", backdrop_path: "/oQxrvHBHClFfGBopljhFCoW5O7o.jpg", overview: "A live-action retelling of Snow White.", release_date: "2025-03-21", vote_average: 6.2, original_language: "en", genre_ids: [14, 10749, 10751] },
+  { id: 1170893, title: "Kalki 2898 AD", poster_path: "/4YpLSGDpFBMNFGOHBMFqnGHFBMN.jpg", backdrop_path: "/rcGOBtp2ThOKkFMnlGwOMfQg4Ql.jpg", overview: "A futuristic mythological epic set in 2898 AD.", release_date: "2024-06-27", vote_average: 7.5, original_language: "te", genre_ids: [28, 878, 14] },
+  { id: 1011985, title: "Kung Fu Panda 4", poster_path: "/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg", backdrop_path: "/1XDDXPXGiI8id7MrUxK36ke7gkX.jpg", overview: "Po must train a new Dragon Warrior.", release_date: "2024-03-08", vote_average: 7.2, original_language: "en", genre_ids: [16, 28, 35] },
+  { id: 748783, title: "The Garfield Movie", poster_path: "/xYduFGuch9OwbCOEUiNFMuPMeKg.jpg", backdrop_path: "/fgsHxz21B27hITCmChzEhPSPGAo.jpg", overview: "Garfield goes on a wild outdoor adventure.", release_date: "2024-05-24", vote_average: 6.8, original_language: "en", genre_ids: [16, 35, 10751] },
+  { id: 1087822, title: "Devara: Part 1", poster_path: "/iHf6bFHuiMZHHiNKu0m3ZjMDMnL.jpg", backdrop_path: "/iHf6bFHuiMZHHiNKu0m3ZjMDMnL.jpg", overview: "A fearless man's legacy haunts his son.", release_date: "2024-09-27", vote_average: 6.5, original_language: "te", genre_ids: [28, 18, 53] },
+  { id: 1064213, title: "Stree 2", poster_path: "/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg", backdrop_path: "/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg", overview: "The town of Chanderi faces a new supernatural threat.", release_date: "2024-08-15", vote_average: 8.1, original_language: "hi", genre_ids: [27, 35, 53] },
+  { id: 1299613, title: "Singham Again", poster_path: "/singham_poster.jpg", backdrop_path: "/singham_backdrop.jpg", overview: "Singham returns for another action-packed mission.", release_date: "2024-11-01", vote_average: 6.9, original_language: "hi", genre_ids: [28, 80, 18] },
+  { id: 1359977, title: "Munjya", poster_path: "/munjya_poster.jpg", backdrop_path: "/munjya_backdrop.jpg", overview: "A supernatural creature falls in love.", release_date: "2024-06-07", vote_average: 7.3, original_language: "hi", genre_ids: [27, 35, 10749] },
+  { id: 1396452, title: "Manjummel Boys", poster_path: "/manjummel_poster.jpg", backdrop_path: "/manjummel_backdrop.jpg", overview: "A group of friends face a life-threatening situation.", release_date: "2024-02-22", vote_average: 8.5, original_language: "ml", genre_ids: [12, 18, 53] },
+];
+
+// City → preferred languages (used to pick relevant movies)
 const CITY_LANGUAGES = {
-  Mumbai:        ["hi", "mr"],
-  Delhi:         ["hi"],
-  Bangalore:     ["kn", "hi"],
-  Chennai:       ["ta", "hi"],
-  Hyderabad:     ["te", "hi"],
-  Pune:          ["hi", "mr"],
-  Kolkata:       ["bn", "hi"],
-  Ahmedabad:     ["gu", "hi"],
-  Jaipur:        ["hi"],
-  Kochi:         ["ml", "hi"],
-  Lucknow:       ["hi"],
-  Chandigarh:    ["hi", "pa"],
-  Indore:        ["hi"],
-  Bhopal:        ["hi"],
-  Nagpur:        ["hi", "mr"],
-  Surat:         ["gu", "hi"],
-  Visakhapatnam: ["te", "hi"],
-  Coimbatore:    ["ta"],
-  Bhubaneswar:   ["or", "hi"],
-  Guwahati:      ["as", "hi"],
+  Mumbai: ["hi", "mr", "en"], Delhi: ["hi", "en"], Bangalore: ["kn", "hi", "en"],
+  Chennai: ["ta", "hi", "en"], Hyderabad: ["te", "hi", "en"], Pune: ["hi", "mr", "en"],
+  Kolkata: ["bn", "hi", "en"], Ahmedabad: ["gu", "hi", "en"], Jaipur: ["hi", "en"],
+  Kochi: ["ml", "hi", "en"], Lucknow: ["hi", "en"], Chandigarh: ["hi", "en"],
+  Indore: ["hi", "en"], Bhopal: ["hi", "en"], Nagpur: ["hi", "mr", "en"],
+  Surat: ["gu", "hi", "en"], Visakhapatnam: ["te", "hi", "en"],
+  Coimbatore: ["ta", "en"], Bhubaneswar: ["or", "hi", "en"], Guwahati: ["as", "hi", "en"],
 };
 
-// Fetch all movies by language once, then assign to cities
-async function fetchAllMoviesByLanguage() {
-  const languages = ['hi', 'en', 'ta', 'te', 'bn', 'ml', 'kn', 'mr', 'gu', 'pa'];
-  const moviesByLang = {};
+function buildCityMovies(cityName) {
+  const langs = CITY_LANGUAGES[cityName] || ["hi", "en"];
+  const priority = MOVIES.filter(m => langs.slice(0, -1).includes(m.original_language));
+  const english = MOVIES.filter(m => m.original_language === "en");
   const seen = new Set();
-
-  for (const lang of languages) {
-    moviesByLang[lang] = [];
-    try {
-      const popular = await tmdbApi.get("/movie/popular", { params: { with_original_language: lang, region: "IN" } });
-      await new Promise(r => setTimeout(r, 1500));
-      const nowPlaying = await tmdbApi.get("/movie/now_playing", { params: { with_original_language: lang, region: "IN" } });
-      const combined = [...popular.data.results, ...nowPlaying.data.results];
-      for (const m of combined) {
-        if (!seen.has(m.id)) { seen.add(m.id); }
-        moviesByLang[lang].push(m);
-      }
-      console.log(`  Lang ${lang}: ${moviesByLang[lang].length} movies`);
-    } catch (e) {
-      console.warn(`  Failed lang ${lang}:`, e.message);
-    }
-    await new Promise(r => setTimeout(r, 2000));
+  const result = [];
+  for (const m of [...priority, ...english]) {
+    if (!seen.has(m.id)) { seen.add(m.id); result.push(m); }
+    if (result.length >= 12) break;
   }
-  return moviesByLang;
-}
-
-function buildCityMovies(cityName, moviesByLang) {
-  const langs = CITY_LANGUAGES[cityName] || ['hi'];
-  const primaryLangs = langs.filter(l => l !== 'en');
-  const seen = new Set();
-  const local = [];
-  const english = [];
-
-  for (const lang of primaryLangs) {
-    for (const m of (moviesByLang[lang] || [])) {
-      if (!seen.has(m.id)) { seen.add(m.id); local.push(m); }
-    }
-  }
-
-  // Pad with max 4 English movies only if needed
-  for (const m of (moviesByLang['en'] || [])) {
-    if (english.length >= 4) break;
-    if (!seen.has(m.id)) { seen.add(m.id); english.push(m); }
-  }
-
-  return [...local, ...english].slice(0, 20);
+  return result;
 }
 
 const CITIES = [
@@ -314,23 +273,11 @@ async function seed() {
 
   const dates = getDateStrings();
   let showtimeCount = 0;
-  const rowLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-  // Fetch all movies by language once (avoids rate limiting)
-  console.log('Fetching movies by language...');
-  const moviesByLang = await fetchAllMoviesByLanguage();
-
-  // Build city movie map from pre-fetched data
-  const cityMovieMap = {};
-  for (const cityDoc of cityDocs) {
-    cityMovieMap[cityDoc.name] = buildCityMovies(cityDoc.name, moviesByLang);
-    console.log(`${cityDoc.name}: ${cityMovieMap[cityDoc.name].length} movies`);
-  }
 
   for (const hall of hallDocs) {
     const cinema = cinemaDocs.find(c => c._id.equals(hall.cinema));
     const city = cityDocs.find(c => c._id.equals(cinema.city));
-    const cityMovies = cityMovieMap[city.name] || [];
+    const cityMovies = buildCityMovies(city.name);
     const hallMovies = [...cityMovies].sort(() => 0.5 - Math.random()).slice(0, 3);
 
     const showtimeDocs = [];
